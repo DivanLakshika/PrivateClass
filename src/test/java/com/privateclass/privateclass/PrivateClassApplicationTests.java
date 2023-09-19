@@ -8,3 +8,6 @@ class PrivateClassApplicationTests {
 
     @Test
     void contextLoads() {
+    }
+
+}

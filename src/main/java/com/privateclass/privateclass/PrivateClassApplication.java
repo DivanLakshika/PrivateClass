@@ -7,4 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PrivateClassApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(PrivateClassApplication.class, args
+        SpringApplication.run(PrivateClassApplication.class, args);
+    }
+
+}
