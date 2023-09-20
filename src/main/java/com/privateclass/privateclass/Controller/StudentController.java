@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 // we don't need this
 @RestController
+@CrossOrigin
 
 @RequestMapping("/student")
 public class StudentController {
@@ -22,14 +23,24 @@ public class StudentController {
 
         return studentService.addS(student);
     }
-    @PostMapping("/addd")
-    public Student Stdadd(@RequestBody Student student){
-        return studentService.adding(student);
-    }
+
     @GetMapping("/allStudent")
     public ResponseEntity<List<Student>>  listOfStudent(){
 
         return studentService.allStudent();
+    }
+
+    @PutMapping("/{studentId}/save")
+    public ResponseEntity<Student>  studentDetailsUpdate(@PathVariable Long studentId,@RequestBody Student updatedStudent ){
+
+        return studentService.updateStudent(studentId,updatedStudent);
+
+    }
+    @DeleteMapping("/{studentId}/delete")
+    public ResponseEntity<?>  studentDetailsDelete(@PathVariable Long studentId ){
+
+        return studentService.deleteStudent(studentId);
+
     }
 
 

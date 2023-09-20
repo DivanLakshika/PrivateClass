@@ -109,4 +109,38 @@ public class TeacherService  {
         else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
     }
+
+
+    public ResponseEntity<?> updateTeacher(Long teacherId, Teacher updatedTeacher) {
+
+            Optional<Teacher> teacher=teacherRepo.findById(teacherId);
+
+            if(teacher.isPresent()){
+
+                Teacher existingTeacher= teacher.get();
+
+                existingTeacher.setName(updatedTeacher.getName());
+                existingTeacher.setEmail(updatedTeacher.getEmail());
+                existingTeacher.setStream(updatedTeacher.getStream());
+                existingTeacher.setSubject(updatedTeacher.getSubject());
+                existingTeacher.setPassword(updatedTeacher.getPassword());
+                existingTeacher.setPhoneNumber(updatedTeacher.getPhoneNumber());
+                    teacherRepo.save(existingTeacher);
+
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+            else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+    }
+
+    public ResponseEntity<?> deleteTeacher(Long teacherId) {
+
+        Optional<Teacher> teacher=teacherRepo.findById(teacherId);
+        if(teacher.isPresent()) {
+            teacherRepo.delete(teacher.get());
+          return new ResponseEntity<>(HttpStatus.OK);
+        }
+        else
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }

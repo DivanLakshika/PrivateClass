@@ -65,5 +65,17 @@ public class TeacherController {
 
     }
 
+    @PutMapping("/{teacherId}/save")
+    public ResponseEntity<?> teacherDetailsUpdate(@PathVariable Long teacherId,@RequestBody Teacher updatedTeacher ){
+
+            return teacherService.updateTeacher(teacherId,updatedTeacher);
+
+    }
+    @DeleteMapping("/{teacherId}/delete")
+    public ResponseEntity<?>  teacherDelete(@PathVariable Long teacherId){
+        return teacherService.deleteTeacher(teacherId);
+
+    }
+
 }
 

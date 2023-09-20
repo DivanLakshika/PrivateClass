@@ -43,8 +43,37 @@ public class StudentService {
        }catch (Exception e){return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);}
     }
 
-    public Student adding(Student student) {
-        return   studentRepo.save(student);
+  
+
+    public ResponseEntity<Student> updateStudent(Long studentId, Student updatedStudent) {
+        
+                Optional<Student> student=studentRepo.findById(studentId);
+                
+                if(student.isPresent()){
+                    Student existingStudent=student.get();
+                    
+                    existingStudent.setName(updatedStudent.getName());
+                    existingStudent.setPhoneNumber(updatedStudent.getPhoneNumber());
+                    existingStudent.setAddress(updatedStudent.getAddress());
+                    existingStudent.setClz(updatedStudent.getClz());
+                    
+                    return new ResponseEntity<>(studentRepo.save(existingStudent),HttpStatus.OK);
+                }
+                else 
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        
+    }
+
+    public ResponseEntity<?> deleteStudent(Long studentId) {
+
+        Optional<Student> student= studentRepo.findById(studentId);
+        if(student.isPresent()){
+
+            studentRepo.delete(student.get());
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
     }
 
     /*
